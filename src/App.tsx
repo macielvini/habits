@@ -1,15 +1,14 @@
-import { useState } from "react";
-import { Habit } from "./components/Habit";
 import "./styles/global.css";
 
-function App() {
+import { useState } from "react";
+import { Header } from "./components/Header";
+
+export function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
-      <Habit text={"Sample Text"} />
-    </>
+    <div className="bg-background text-white w-screen h-screen flex justify-center items-center">
+      <Header />
+    </div>
   );
 }
-
-export default App;

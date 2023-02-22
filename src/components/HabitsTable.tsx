@@ -9,6 +9,11 @@ export function HabitsTable() {
   const minimumTableDays = 18 * 7;
   const daysToFill = Math.abs(daysOfYear.length - minimumTableDays);
 
+  const data = {
+    completed: 4,
+    amount: 6,
+  };
+
   return (
     <div className="w-full max-w-5xl flex ">
       <div className="grid grid-rows-7 grid-flow-row gap-3">
@@ -23,7 +28,7 @@ export function HabitsTable() {
       </div>
       <div className="grid grid-rows-7 grid-flow-col gap-3">
         {daysOfYear.map((d, i) => (
-          <TableDay key={i} />
+          <TableDay key={i} completed={data.completed} amount={data.amount} />
         ))}
         {daysToFill > 0 &&
           Array.from({ length: daysToFill }).map((_, i) => (

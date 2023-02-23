@@ -1,7 +1,7 @@
 import * as Popover from "@radix-ui/react-popover";
 import clsx from "clsx";
+import dayjs from "dayjs";
 import { HabitPopover } from "./HabitPopover";
-import { ProgressBar } from "./ProgressBar";
 
 interface TableDayProps {
   date: Date;
@@ -9,8 +9,11 @@ interface TableDayProps {
   amount?: number;
 }
 
-export function TableDay({ completed = 0, amount = 0 }: TableDayProps) {
+export function TableDay({ completed = 0, amount = 0, date }: TableDayProps) {
   const progress = amount > 0 ? Math.floor((completed / amount) * 100) : 0;
+
+  const dayAndMonth = dayjs(date).format("DD/MM");
+  const weekDay = dayjs(date).format("dddd");
 
   return (
     <Popover.Root>
@@ -24,11 +27,7 @@ export function TableDay({ completed = 0, amount = 0 }: TableDayProps) {
           "bg-violet-500 border-violet-400": progress >= 80,
         })}
       />
-      <HabitPopover
-        progress={progress}
-        date={"23/02"}
-        weekDay={"Terça-feira"}
-      />
+      <HabitPopover progress={progress} date={dayAndMonth} weekDay={weekDay} />
     </Popover.Root>
   );
 }

@@ -1,4 +1,5 @@
 import "./styles/global.css";
+import "./lib/dayjs";
 
 import { useState } from "react";
 import { Header } from "./components/Header";

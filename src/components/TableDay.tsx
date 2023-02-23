@@ -4,14 +4,13 @@ import { HabitPopover } from "./HabitPopover";
 import { ProgressBar } from "./ProgressBar";
 
 interface TableDayProps {
-  completed: number;
-  amount: number;
+  date: Date;
+  completed?: number;
+  amount?: number;
 }
 
-export function TableDay({ completed, amount }: TableDayProps) {
-  completed = Math.floor(Math.random() * 6);
-
-  const progress = Math.floor((completed / amount) * 100);
+export function TableDay({ completed = 0, amount = 0 }: TableDayProps) {
+  const progress = amount > 0 ? Math.floor((completed / amount) * 100) : 0;
 
   return (
     <Popover.Root>

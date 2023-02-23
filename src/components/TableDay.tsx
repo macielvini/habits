@@ -1,5 +1,6 @@
 import * as Popover from "@radix-ui/react-popover";
 import clsx from "clsx";
+import { HabitPopover } from "./HabitPopover";
 import { ProgressBar } from "./ProgressBar";
 
 interface TableDayProps {
@@ -24,16 +25,11 @@ export function TableDay({ completed, amount }: TableDayProps) {
           "bg-violet-500 border-violet-400": progress >= 80,
         })}
       />
-      <Popover.Portal>
-        <Popover.Content className="min-w-[320px] p-6 rounded-2xl bg-zinc-900 flex flex-col">
-          <Popover.Arrow className="fill-zinc-900" height={8} width={16} />
-          <span className="font-semibold text-zinc-400">Terça-feira</span>
-          <span className="mt-1 font-extrabold leading-tight text-3xl">
-            23/02
-          </span>
-          <ProgressBar progress={progress} />
-        </Popover.Content>
-      </Popover.Portal>
+      <HabitPopover
+        progress={progress}
+        date={"23/02"}
+        weekDay={"Terça-feira"}
+      />
     </Popover.Root>
   );
 }

@@ -1,7 +1,9 @@
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { Check } from "phosphor-react";
+import { FormEvent } from "react";
+import { useState } from "react";
 
-const weekDays = [
+const availableWeekDays = [
   "Doming",
   "Segunda-feira",
   "Terça-feira",
@@ -12,8 +14,24 @@ const weekDays = [
 ];
 
 export function CreateHabitForm() {
+  const [title, setTitle] = useState("");
+  const [weekDays, setWeekDays] = useState<number[]>([]);
+
+  function formSubmitHandler(e: FormEvent) {
+    e.preventDefault();
+  }
+
+  function handleToggleWeekDay(index: number) {
+    if (weekDays.includes(index)) {
+      const updatedWeekDays = weekDays.filter((w) => w !== index);
+      setWeekDays(updatedWeekDays);
+    } else {
+      setWeekDays([...weekDays, index]);
+    }
+  }
+
   return (
-    <form action="" className="w-full flex flex-col mt-6 ">
+    <form onSubmit={formSubmitHandler} className="w-full flex flex-col mt-6 ">
       <label htmlFor="title" className="font-semibold leading-tight">
         Qual seu comprometimento
       </label>
@@ -25,6 +43,7 @@ export function CreateHabitForm() {
         id="title"
         placeholder="ex.: Exercícios, dormir bem..."
         autoFocus
+        onChange={(e) => setTitle(e.target.value)}
       />
 
       <label htmlFor="" className="font-semibold leading-tight mt-4">
@@ -32,8 +51,12 @@ export function CreateHabitForm() {
       </label>
 
       <div className="flex flex-col gap-2 mt-3">
-        {weekDays.map((d, i) => (
-          <Checkbox.Root key={i} className="flex items-center gap-3 group">
+        {availableWeekDays.map((d, i) => (
+          <Checkbox.Root
+            key={i}
+            className="flex items-center gap-3 group"
+            onCheckedChange={() => handleToggleWeekDay(i)}
+          >
             <div className="h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-data-[state=checked]:border-green-500">
               <Checkbox.Indicator>
                 <Check size={20} className="text-white" />

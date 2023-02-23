@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { getSummary } from "../lib/axios";
 import { generateDaysOfYear } from "../utils/generateDaysOfYear";
+import { InvalidTableDay } from "./InvalidTableDay";
 import { TableDay } from "./TableDay";
 
 const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
@@ -42,6 +43,7 @@ export function HabitsTable() {
           const dayInSummary = summary.find((s) =>
             dayjs(d).isSame(s.date, "day")
           );
+
           return (
             <TableDay
               key={i}
@@ -53,10 +55,7 @@ export function HabitsTable() {
         })}
         {daysToFill > 0 &&
           Array.from({ length: daysToFill }).map((_, i) => (
-            <div
-              key={i}
-              className="w-10 h-10 bg-zinc-900 border-2 border-zinc-900 rounded-lg opacity-40 cursor-not-allowed"
-            />
+            <InvalidTableDay key={"_" + i} />
           ))}
       </div>
     </div>

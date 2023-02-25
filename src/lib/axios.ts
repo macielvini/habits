@@ -22,3 +22,7 @@ export function getHabitTasklist(date: Date) {
     },
   });
 }
+
+export function toggleHabit(id: string) {
+  return api.patch(`/habits/${id}/toggle`);
+}

@@ -6,9 +6,14 @@ import { ProgressBar } from "./ProgressBar";
 interface HabitProps {
   date: Date;
   progress: number;
+  handleCompletedChange: (completed: number) => void;
 }
 
-export function HabitPopover({ date, progress }: HabitProps) {
+export function HabitPopover({
+  date,
+  progress,
+  handleCompletedChange,
+}: HabitProps) {
   const dayAndMonth = dayjs(date).format("DD/MM");
   const weekDay = dayjs(date).format("dddd");
 
@@ -21,7 +26,10 @@ export function HabitPopover({ date, progress }: HabitProps) {
           {dayAndMonth}
         </span>
         <ProgressBar progress={progress} />
-        <HabitTaskList date={date} />
+        <HabitTaskList
+          date={date}
+          handleCompletedChange={handleCompletedChange}
+        />
       </Popover.Content>
     </Popover.Portal>
   );

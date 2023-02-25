@@ -39,20 +39,21 @@ export function HabitsTable() {
         ))}
       </div>
       <div className="grid grid-rows-7 grid-flow-col gap-3">
-        {daysOfYear.map((d, i) => {
-          const dayInSummary = summary.find((s) =>
-            dayjs(d).isSame(s.date, "day")
-          );
+        {summary.length > 0 &&
+          daysOfYear.map((d, i) => {
+            const dayInSummary = summary.find((s) =>
+              dayjs(d).isSame(s.date, "day")
+            );
 
-          return (
-            <TableDay
-              key={i}
-              amount={dayInSummary?.amount}
-              completed={dayInSummary?.completed}
-              date={d}
-            />
-          );
-        })}
+            return (
+              <TableDay
+                key={i}
+                amount={dayInSummary?.amount}
+                defaultCompleted={dayInSummary?.completed}
+                date={d}
+              />
+            );
+          })}
         {daysToFill > 0 &&
           Array.from({ length: daysToFill }).map((_, i) => (
             <InvalidTableDay key={"_" + i} />

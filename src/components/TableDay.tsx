@@ -1,16 +1,26 @@
 import * as Popover from "@radix-ui/react-popover";
 import clsx from "clsx";
-import dayjs from "dayjs";
+import { useState } from "react";
 import { HabitPopover } from "./HabitPopover";
 
 interface TableDayProps {
   date: Date;
-  completed?: number;
+  defaultCompleted?: number;
   amount?: number;
 }
 
-export function TableDay({ completed = 0, amount = 0, date }: TableDayProps) {
+export function TableDay({
+  defaultCompleted = 0,
+  amount = 0,
+  date,
+}: TableDayProps) {
+  const [completed, setCompleted] = useState(defaultCompleted);
+
   const progress = amount > 0 ? Math.floor((completed / amount) * 100) : 0;
+
+  function handleCompletedChange(completed: number) {
+    setCompleted(completed);
+  }
 
   return (
     <Popover.Root>
@@ -24,7 +34,11 @@ export function TableDay({ completed = 0, amount = 0, date }: TableDayProps) {
           "bg-violet-500 border-violet-400": progress >= 80,
         })}
       />
-      <HabitPopover progress={progress} date={date} />
+      <HabitPopover
+        progress={progress}
+        date={date}
+        handleCompletedChange={handleCompletedChange}
+      />
     </Popover.Root>
   );
 }

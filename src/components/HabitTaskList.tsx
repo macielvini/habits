@@ -6,6 +6,7 @@ import { getHabitTasklist, toggleHabit } from "../lib/axios";
 
 interface HabitTaskListProps {
   date: Date;
+  handleCompletedChange: (completed: number) => void;
 }
 
 interface Habits {
@@ -17,7 +18,10 @@ interface Habits {
   completedHabits: string[];
 }
 
-export function HabitTaskList({ date }: HabitTaskListProps) {
+export function HabitTaskList({
+  date,
+  handleCompletedChange,
+}: HabitTaskListProps) {
   const [taskList, setTaskList] = useState<Habits>();
 
   async function fetchData() {
@@ -52,6 +56,8 @@ export function HabitTaskList({ date }: HabitTaskListProps) {
         possibleHabits: taskList!.possibleHabits,
         completedHabits,
       });
+
+      handleCompletedChange(completedHabits.length);
     } catch (error) {
       console.log(error);
       alert("Erro ao marcar hábito");

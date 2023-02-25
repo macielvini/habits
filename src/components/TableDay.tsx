@@ -12,9 +12,6 @@ interface TableDayProps {
 export function TableDay({ completed = 0, amount = 0, date }: TableDayProps) {
   const progress = amount > 0 ? Math.floor((completed / amount) * 100) : 0;
 
-  const dayAndMonth = dayjs(date).format("DD/MM");
-  const weekDay = dayjs(date).format("dddd");
-
   return (
     <Popover.Root>
       <Popover.Trigger
@@ -27,7 +24,7 @@ export function TableDay({ completed = 0, amount = 0, date }: TableDayProps) {
           "bg-violet-500 border-violet-400": progress >= 80,
         })}
       />
-      <HabitPopover progress={progress} date={dayAndMonth} weekDay={weekDay} />
+      <HabitPopover progress={progress} date={date} />
     </Popover.Root>
   );
 }

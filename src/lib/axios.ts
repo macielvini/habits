@@ -14,3 +14,11 @@ interface HabitBody {
 export function postHabit(body: HabitBody) {
   return api.post("/habits", body);
 }
+
+export function getHabitTasklist(date: Date) {
+  return api.get(`/day`, {
+    params: {
+      date: date.toISOString(),
+    },
+  });
+}

@@ -7,3 +7,7 @@ https://github.com/macielvini/habits-api
 3. Run `npm run dev`
 
 ### Screenshots
+<img src="./screenshots/home.png" height="500px">
+<img src="./screenshots/new-habit.png" height="500px">
+<img src="./screenshots/habit-pop-up.png" height="500px">
+
